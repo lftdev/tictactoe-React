@@ -1,6 +1,6 @@
 {
   "name": "tictactoe",
-  "homepage": "http://hydrae-soft.github.io/tictactoe-React/",
+  "homepage": "https://hydrae-soft.github.io/tictactoe-React/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -26,6 +26,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "gh-pages": "^5.0.0",
+    "react-router-dom": "^6.12.1",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }
