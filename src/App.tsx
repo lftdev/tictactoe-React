@@ -9,30 +9,57 @@ const PLAYERS = {
 function App() {
   const [turn, setTurn] = useState(PLAYERS.X)
   const [board, paintBoard] = useState([['', '', ''], ['', '', ''], ['', '', '']])
-  const refreshBoard = (r_index: number, c_index: number) => {
+  const [winner, setWinner] = useState('')
+  const refreshBoard = (rIndex: number, cIndex: number) => {
     const newBoard = board
-    newBoard[r_index][c_index] = turn
+    newBoard[rIndex][cIndex] = turn
     paintBoard(newBoard)
-    checkForWinner(newBoard, r_index, c_index)
+    setWinner(checkForWinner(newBoard, rIndex, cIndex)? turn : '')
     setTurn(turn === PLAYERS.X? PLAYERS.O : PLAYERS.X)
   }
-  const checkForWinner = (newBoard: string[][], r_index: number, c_index: number) => {
-    let winner = ''
-    if (newBoard[r_index].every((square) => square === turn) || (newBoard.every((row) => row[c_index] === turn))) {
-      winner = turn
-      console.log('Winner: ' + turn)
+  function checkForWinner (newBoard: string[][], rIndex: number, cIndex: number): boolean {
+    // Check if main diagonal is filled and return true in that case.
+    if (rIndex == cIndex) {
+       const win = () => {
+        for (let i = 0; i < 3; i++)
+          if (newBoard[i][i] !== turn)
+            return false
+        return true
+      }
+      if (win()) return true
     }
-    return winner
+    // Check if anti-diagonal is filled and return true in that case.
+    if (((rIndex == 1) && (cIndex == 1)) || ((rIndex == 0) && (cIndex == 2)) || ((rIndex == 2) && (cIndex == 0))) {
+      const win = () => {
+        let j = 2
+        for (let i = 0; i < 3; i++)
+          if (newBoard[i][j--] !== turn)
+            return false
+        return true
+      }
+      if (win()) return true
+    }
+    const relativeRowIsFilled = () => newBoard[rIndex].every(square => square === turn)
+    const relativeColumnIsFilled = () => newBoard.every(row => row[cIndex] === turn)
+    // Detect if current row, or current column were filled by the latest player.
+    if (relativeRowIsFilled() || relativeColumnIsFilled())
+      return true
+    return false
+  }
+  const resetGame = () => {
+    setTurn(turn === PLAYERS.X? PLAYERS.O : PLAYERS.X)
+    paintBoard([['', '', ''], ['', '', ''], ['', '', '']])
+    setWinner('')
   }
   return (
     <>
       <main className='board'>
         <h1>Tic Tac Toe</h1>
         <section className='game'>
-          {board.map((row, r_index: number) => {
-            return row.map((_, c_index) => {
+          {board.map((row, rIndex: number) => {
+            return row.map((_, cIndex) => {
               return (
-                <Square key={`${r_index}-${c_index}`} r_index={r_index} c_index={c_index} refreshBoard={refreshBoard} initialClicked={false}>{board[r_index][c_index]}</Square>
+                <Square key={`${rIndex}-${cIndex}`} rIndex={rIndex} cIndex={cIndex} refreshBoard={refreshBoard} clicked={false}>{board[rIndex][cIndex]}</Square>
               )
             })
           })}
@@ -41,6 +68,17 @@ function App() {
           <TurnView isSelected={turn === PLAYERS.X}>{PLAYERS.X}</TurnView>
           <TurnView isSelected={turn === PLAYERS.O}>{PLAYERS.O}</TurnView>
         </section>
+        {
+          winner !== '' && (
+            <section className="winner">
+              <div className="text">
+                <h2>Winner:</h2>
+                <div className="square">{winner}</div>
+              </div>
+              <button onClick={resetGame}>Reset</button>
+            </section>
+          )
+        }
       </main>
     </>
   )

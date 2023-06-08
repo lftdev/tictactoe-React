@@ -35,9 +35,8 @@ body {
   color: #eee;
   margin-bottom: 16px;
 }
-.board button {
+button {
   padding: 8px 12px;
-  margin: 25px;
   background: transparent;
   border: 2px solid #eee;
   color: #eee;
@@ -64,8 +63,7 @@ body {
   position: relative;
   border-radius: 10px;
 }
-.turn .turn-view,
-.winner .square {
+.turn .turn-view {
   width: 70px;
   height: 70px;
   pointer-events: none;
@@ -97,14 +95,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
-}
-.winner .win {
-  margin: 0 auto;
-  width: fit-content;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  display: flex;
-  gap: 15px;
 }
 .turn-view,
 .square {

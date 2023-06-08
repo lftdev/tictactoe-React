@@ -1,17 +1,15 @@
-import { useState } from "react"
 interface SquareProps {
-    r_index: number
-    c_index: number
+    rIndex: number
+    cIndex: number
     children: string
-    refreshBoard: (r_index: number, c_index: number) => void
-    initialClicked: boolean
+    refreshBoard: (rIndex: number, cIndex: number) => void
+    clicked: boolean
 }
-export function Square({ children, r_index, c_index, refreshBoard, initialClicked }: SquareProps) {
-    const [clicked, setClicked] = useState(initialClicked)
+export function Square({ children, rIndex, cIndex, refreshBoard, clicked }: SquareProps) {
     const handleClick = () => {
         if(!clicked) {
-            refreshBoard(r_index, c_index)
-            setClicked(true)
+            refreshBoard(rIndex, cIndex)
+            clicked = true
         }
     }
     return (
