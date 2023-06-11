@@ -5,5 +5,6 @@ export function checkForWinner(newBoard: string[][], rIndex: number, cIndex: num
   if (rIndex == cIndex) if (newBoard.every((row, index) => !(row[index] !== turn))) return true;
   // Check if anti-diagonal is filled and return true in that case.
   let j = 2;
-  return newBoard.every((row) => !(row[j--] !== turn));
+  if (newBoard.every((row) => row[j--] === turn)) return true
+  return false
 }
