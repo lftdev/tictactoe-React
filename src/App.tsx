@@ -7,7 +7,6 @@ const PLAYERS = {
   O: 'o',
 }
 function App() {
-  let DRAW = false
   const [turn, setTurn] = useState(PLAYERS.X)
   const [board, paintBoard] = useState([
     ['', '', ''],
@@ -15,6 +14,7 @@ function App() {
     ['', '', '']
   ])
   const [winner, setWinner] = useState('')
+  const [draw, setDraw] = useState(false)
   const refreshBoard = (rIndex: number, cIndex: number) => {
     const newBoard = board, oldTurn = turn
     newBoard[rIndex][cIndex] = oldTurn
@@ -22,8 +22,10 @@ function App() {
     const win = checkForWinner(newBoard, rIndex, cIndex, oldTurn) ? oldTurn : ''
     if (win !== '')
       setWinner(win)
-    else if (newBoard.every(row => row.every(square => square !== '')))
-      DRAW = true
+    else if (newBoard.every(row => row.every(square => square !== ''))) {
+      setDraw(true)
+      setWinner('')
+    }
     setTurn(turn === PLAYERS.X ? PLAYERS.O : PLAYERS.X)
   }
   const resetGame = () => {
@@ -34,7 +36,7 @@ function App() {
       ['', '', '']
     ])
     setWinner('')
-    DRAW = false
+    setDraw(false)
   }
   return (
     <>
@@ -55,11 +57,11 @@ function App() {
           <TurnView isSelected={turn === PLAYERS.X}>{PLAYERS.X}</TurnView>
           <TurnView isSelected={turn === PLAYERS.O}>{PLAYERS.O}</TurnView>
         </section>
-        {((winner !== '') || DRAW) && (
+        {(winner !== '' || draw) && (
           <section className='winner'>
             <div className='text'>
-              <h2>{DRAW? 'Draw' : 'Winner:'}</h2>
-              <div className='square'>{DRAW? PLAYERS.X + PLAYERS.O : winner}</div>
+              <h2>{draw? 'Draw' : 'Winner:'}</h2>
+              <div className='square'>{draw? PLAYERS.X + PLAYERS.O : winner}</div>
             </div>
             <button onClick={resetGame}>Reset</button>
           </section>
