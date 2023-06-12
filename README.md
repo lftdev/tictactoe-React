@@ -39,6 +39,7 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
+- CSS code imported from this [repository](https://github.com/midudev/aprendiendo-react/tree/master/projects/02-tic-tac-toe).
 
 ### What I learned
 
