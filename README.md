@@ -24,8 +24,8 @@ Users should be able to:
 
 ### Links
 
-- [Go to solution](https://github.com/hydrae-soft/tictactoe-React)
-- [Go to live site](https://hydrae-soft.github.io/tictactoe-React/)
+- [Go to solution](https://github.com/lftdev/tictactoe-React)
+- [Go to live site](https://lftdev.github.io/tictactoe-React/)
 
 ## My process
 
@@ -48,6 +48,6 @@ Users should be able to:
 
 ## Author
 
-- Linkedin profile: [Lucas Franco Torres](https://www.linkedin.com/in/lucas-franco-torres-front-dev/)
+- Linkedin profile: [Lucas Franco Torres](https://www.linkedin.com/in/frontdev-lucastorres/)
 - Frontend Mentor: [@Ludroid](https://www.frontendmentor.io/profile/Ludroid)
-- GitHub profile: [hydrae-soft](https://github.com/hydrae-soft)
+- GitHub profile: [lftdev](https://github.com/lftdev)
